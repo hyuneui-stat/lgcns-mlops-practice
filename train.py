@@ -26,11 +26,14 @@ from src.preprocess import preprocess_pipeline
 # 로그 들어갈 위치
 # 로그를 정해진 로그 경로에 logs.log로 저장하도록 설정
 
+logger = set_logger(os.path.join(LOG_FILEPATH, "logs.log"))
+
 sys.excepthook = handle_exception
 warnings.filterwarnings(action="ignore")
 
 
 if __name__ == "__main__":
+    logger.info("Loading Data")
     train_df = pd.read_csv(os.path.join(DATA_PATH, "house_rent_train.csv"))
 
     _X = train_df.drop(["rent", "area_locality", "posted_on"], axis=1)
